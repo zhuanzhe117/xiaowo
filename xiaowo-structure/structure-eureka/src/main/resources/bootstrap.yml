@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: structure-eureka
+  http:
+    encoding: { charset: UTF-8, enable: true, force: true }
+info:
+  component: structure-eureka

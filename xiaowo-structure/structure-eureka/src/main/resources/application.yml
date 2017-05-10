@@ -1,0 +1,30 @@
+# 参考 http://www.tuicool.com/articles/veUjQba
+# Web容器配置
+server:
+  port: 1111
+  undertow:
+    accesslog:
+      # 开启Undertow访问日志
+      enabled: true
+      dir: /data/ghylogs/
+
+eureka:
+#  #EurekaInstanceConfigBean
+#  instance:
+#    preferIpAddress: true
+#    instanceId: ${spring.cloud.client.hostname}:${server.port}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+#    healthcheck:
+#      enabled: false
+    #默认情况下本服务将要注册到的Eureka服务器
+    serviceUrl:
+      defaultZone: http://192.168.51.218:1111/eureka/
+
+# Log 配置 级别大写 TRACE|DEBUG|INFO|WARN|ERROR
+logging:
+  level:
+    #root: INFO
+    com.xiaowo: DEBUG
+
