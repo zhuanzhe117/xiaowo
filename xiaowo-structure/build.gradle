@@ -12,7 +12,6 @@ subprojects {
 
     repositories {
         mavenLocal()
-        maven { url "${xiaowoMvnRepoRrlBase}/groups/public" }
         maven { url "http://repo.spring.io/libs-release" }
         jcenter()
         mavenCentral()

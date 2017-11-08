@@ -27,4 +27,22 @@ logging:
   level:
     #root: INFO
     com.xiaowo: DEBUG
-
+spring:
+  velocity:
+      suffix: .html
+      cache: false
+      check-template-location: true
+      charset: UTF-8
+      content-type: text/html
+      date-tool-attribute: dateTool
+      number-tool-attribute: numberTool
+      toolbox-config-location: toolbox.xml
+      expose-spring-macro-helpers: true
+      expose-request-attributes: true
+      expose-session-attributes: true
+  rabbitmq:
+    host: 192.168.51.184
+    port: 5672
+    virtualHost: /
+    username: guhaiyan
+    password: guhaiyan
