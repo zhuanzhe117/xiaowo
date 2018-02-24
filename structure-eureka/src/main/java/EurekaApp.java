@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 描 述：注册中心启动类
  * ========================================================
  */
-//@EnableEurekaServer
+@EnableEurekaServer
 @SpringBootApplication
 @ComponentScan(basePackages = {"com"})
 public class EurekaApp {

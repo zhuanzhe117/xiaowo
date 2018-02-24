@@ -1,7 +1,7 @@
 # 参考 http://www.tuicool.com/articles/veUjQba
 # Web容器配置
 server:
-  port: 1111
+  port: 8761
   undertow:
     accesslog:
       # 开启Undertow访问日志
@@ -20,7 +20,7 @@ eureka:
 #      enabled: false
     #默认情况下本服务将要注册到的Eureka服务器
     serviceUrl:
-      defaultZone: http://192.168.51.218:1111/eureka/
+      defaultZone: http://192.168.51.184:8761/eureka/
 
 # Log 配置 级别大写 TRACE|DEBUG|INFO|WARN|ERROR
 logging:
