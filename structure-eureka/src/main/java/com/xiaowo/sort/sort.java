@@ -1,5 +1,6 @@
 package com.xiaowo.sort;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 
 /**
@@ -112,7 +113,7 @@ public class sort {
         //输出堆顶元素并调整建新堆的过程
         int count = len-1;
         while(count > 0 ){
-            //交换树根与最后一个值
+            //交换堆顶与最后一个值
             swap(a,0,count);
             count -- ;
             heapAdjust(a,0,count);
@@ -154,14 +155,18 @@ public class sort {
 
     //冒泡排序 3,6,12,8
     public static void bubble(int[] a ,int n){
+        boolean flag;
         for (int i = 0; i < n-1; i++) {
+            flag = true;
             for (int j = 0; j < n-1-i; j++) {//第i趟的时候，已经排好的数是i个，一共有n个数，所以最后一个是n-i，索引是n-i-1，j最大值是这个数的前一个
                 if (a[j+1] < a[j]){
                     int temp = a[j];
                     a[j] = a[j+1];
                     a[j+1] = temp;
+                    flag = false;
                 }
             }
+            if(flag) return;
         }
     }
 
@@ -194,13 +199,13 @@ public class sort {
     //插入排序
     public static void insertion(int[] a, int n){
         for (int i = 1; i < n; i++) {
-            int v = a[i];
+            int temp =  a[i];
             int j = i-1;
-            while (j>=0 && a[j]>v){
+            while (j>=0 && a[j]>temp){
                 a[j+1] = a[j];
-                a[j] = v;
                 j--;
             }
+            a[j+1] = temp;
         }
     }
 
@@ -216,8 +221,56 @@ public class sort {
         return m;
     }
 
+    public static void getIncSeq(int[] a){
+        int n = a.length;
+        int start =0;
+        int count =1;
+        int tempStart =0;
+        int tempCount =1;
+        for (int i = 1; i < n; i++) {
+            if (a[i-1]<a[i]){
+                tempCount ++;
+            }else {
+                if (tempCount>count){
+                    count = tempCount;
+                    start = tempStart;
+                }
+                tempStart = i;
+                tempCount = 1;
+            }
+            if(i==(n-1)){
+                if (tempCount>count){
+                    count = tempCount;
+                    start = tempStart;
+                }
+            }
+        }
+        System.out.println(MessageFormat.format("start:{0} count:{1}" ,start,count));
+    }
+
+    public static void getSeq(int[] a){
+        int n = a.length;
+        int start =0;
+        int end =0;
+
+        for(int i =0;i<n-1;i++){
+            start = i;
+            while (i+1<n && a[i]<a[i+1]){
+                i++;
+            }
+            if( (i-end-1) > (end -start)){
+                start = end +1;
+                end =i;
+            }
+        }
+        System.out.println(MessageFormat.format("start:{0} end:{1}" ,start,end));
+    }
 
     public static void main(String[] args) {
+        int[] a = {1,0,3,5,1,4,0,7,9,13};
+//        getSeq(a);
+//        int[] a = {3,7,10,11,12,15,24};
+//        bubble(a ,7);
 //        int[] a = {7,3,24,12,5};
 //        insertion(a,5);
 //        for (int i = 0; i < 5; i++) {
@@ -234,14 +287,13 @@ public class sort {
 
 
         //测试堆排序2
-        //6,5,3,1,8,7,2,4
 //        Integer[] array = {6,5,3,1,8,7,2,4};
 //        heapSort(array);
 
         //测试快速排序
         //6,5,3,1,8,7,2,4
-        int[] array = {6,5,3,1,8,7,2,4};
-        quickSort(array,0,array.length-1);
+//        int[] array = {6,5,3,1,8,7,2,4};
+//        quickSort(array,0,array.length-1);
 
     }
 }

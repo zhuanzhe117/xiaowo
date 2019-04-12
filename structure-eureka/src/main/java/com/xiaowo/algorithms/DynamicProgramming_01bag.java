@@ -34,16 +34,54 @@ public class DynamicProgramming_01bag {
                     System.out.print(" " + results[j]);
                 }
             }
-            preResults = results;
+            preResults = results.clone();
             System.out.println("");
         }
         return results[w];
     }
 
+    /**
+     * 使用二维数组实现，并打印最优解的构成
+     * @param n
+     * @param w
+     * @param values
+     * @param weights
+     */
+    public static void getMostValueByDP1(int n, int w, int[] values, int[] weights){
+        int[][] v = new int[n+1][w+1];
+        for (int i =0;i<=n;i++){//第0行和第0列初始化为0，方便后续第一个物品计算时取前面一行的值
+            v[i][0] = 0;
+        }
+        for (int j =0;j<=w;j++){
+            v[0][j] =0;
+        }
+        for (int i =1;i<=n;i++){//真正开始填充表格，计算每个格子的最大价值
+            for (int j =1;j<=w;j++){
+                if (weights[i-1]>j){
+                    v[i][j] = v[i-1][j];
+                }else {
+                    v[i][j] = Math.max(values[i-1] + v[i-1][j-weights[i-1]],v[i-1][j]);
+                }
+                System.out.print(v[i][j]+" ");
+            }
+            System.out.println();
+        }
+        int[] exists = new int[n];//打印最优解构成，倒着计算，如果v[i][w] > v[i-1][w]，说明第i个物品在背包中。
+        for (int i =n;i>0;i--){
+            if(v[i][w] > v[i-1][w]){
+                exists[i-1] = 1;
+                w = w - weights[i-1];
+            }else {
+                exists[i-1] = 0;
+            }
+            System.out.print(exists[i-1] + ",");
+        }
+    }
     public static void main(String[] args) {
-        int[] g = {1500,3000,2000};
-        int[] p = {1,4,3};
-        int gold = getMostValueByDP(3,4,g,p);
-        System.out.println("最大价值是 " +gold);
+        int[] values = {1000, 2000, 3000, 4000, 1500, 5000, 200, 400};
+        int[] weights = {1, 3, 4, 2, 5, 4, 5, 1};
+//        int gold = getMostValueByDP(3,4,g,p);
+//        System.out.println("最大价值是 " +gold);
+        getMostValueByDP1(values.length,4,values,weights);
     }
 }

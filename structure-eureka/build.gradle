@@ -11,7 +11,7 @@ buildscript {
     }
     repositories {
         mavenLocal()
-        maven { url "${xiaowoRepoBase}/groups/public" }
+//        maven { url "${xiaowoRepoBase}/groups/public" }
         mavenCentral()
     }
     dependencies {
